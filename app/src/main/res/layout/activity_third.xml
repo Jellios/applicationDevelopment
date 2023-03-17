@@ -1,0 +1,44 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".ThirdActivity">
+
+    <RadioGroup
+        android:id="@+id/rdbtn_group"
+        android:layout_width="217dp"
+        android:layout_height="204dp"
+        android:layout_marginStart="97dp"
+        android:layout_marginTop="50dp"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent">
+
+        <RadioButton
+            android:id="@+id/rdbtn_third1"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:checked="true"
+            android:text="Pizza" />
+
+        <RadioButton
+            android:id="@+id/rdbtn_third2"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Frietjes" />
+
+    </RadioGroup>
+
+    <Button
+        android:id="@+id/btn_third1"
+        android:layout_width="217dp"
+        android:layout_height="60dp"
+        android:layout_marginStart="96dp"
+        android:layout_marginTop="80dp"
+        android:onClick="backMain"
+        android:text="ReturnMain"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/rdbtn_group" />
+
+</androidx.constraintlayout.widget.ConstraintLayout>
