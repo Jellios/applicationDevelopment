@@ -1,0 +1,6 @@
+<resources>
+    <string name="app_name">Qoutes ding</string>
+    <string name="nav_Home">Home</string>
+    <string name="nav_view_all">View all quotes</string>
+    <string name="show_random">Show random quote</string>
+</resources>
