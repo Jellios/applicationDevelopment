@@ -10,23 +10,22 @@
         android:id="@+id/Dashboard"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginStart="1dp"
+        android:layout_marginStart="5dp"
         android:layout_marginTop="1dp"
         android:text="@string/nav_Home"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
     <TextView
-        android:id="@+id/textView3"
-        android:layout_width="157dp"
-        android:layout_height="40dp"
-        android:layout_marginStart="136dp"
-        android:layout_marginTop="344dp"
-        android:text="TextView"
+        android:id="@+id/tv_main_quote"
+        android:layout_width="402dp"
+        android:layout_height="50dp"
+        android:layout_marginStart="4dp"
+        android:layout_marginTop="293dp"
         android:textAlignment="center"
-        android:textSize="20sp"
+        android:textSize="14sp"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+        app:layout_constraintTop_toBottomOf="@+id/Dashboard" />
 
     <Button
         android:id="@+id/btn_main_show_quote"
@@ -34,17 +33,30 @@
         android:layout_height="wrap_content"
         android:layout_marginStart="108dp"
         android:layout_marginTop="76dp"
+        android:onClick="setRandomQuote"
         android:text="@string/show_random"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/textView3" />
+        app:layout_constraintTop_toBottomOf="@+id/tv_main_quote" />
 
     <Button
         android:id="@+id/btn_main_view_all"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="21dp"
+        android:layout_width="170dp"
+        android:layout_height="49dp"
+        android:layout_marginStart="10dp"
         android:layout_marginTop="1dp"
+        android:onClick="onShowAllQuotes"
         android:text="@string/nav_view_all"
         app:layout_constraintStart_toEndOf="@+id/Dashboard"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <Button
+        android:id="@+id/button"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="10dp"
+        android:layout_marginTop="1dp"
+        android:onClick="onAddQuote"
+        android:text="@string/nav_add_quote"
+        app:layout_constraintStart_toEndOf="@+id/btn_main_view_all"
         app:layout_constraintTop_toTopOf="parent" />
 </androidx.constraintlayout.widget.ConstraintLayout>

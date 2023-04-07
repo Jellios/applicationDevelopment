@@ -1,6 +1,9 @@
 <resources>
-    <string name="app_name">Qoutes ding</string>
+    <string name="app_name">Quotes ding</string>
     <string name="nav_Home">Home</string>
     <string name="nav_view_all">View all quotes</string>
     <string name="show_random">Show random quote</string>
+    <string name="nav_add_quote">Add Quote</string>
+    <string name="back">Back</string>
+    <string name="quotePrompt">Quote text: </string>
 </resources>
