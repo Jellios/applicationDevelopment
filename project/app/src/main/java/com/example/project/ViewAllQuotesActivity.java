@@ -7,7 +7,10 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import android.app.Activity;
 import android.content.Intent;
+import android.database.Cursor;
+import android.database.sqlite.SQLiteDatabase;
 import android.os.Bundle;
+import android.provider.BaseColumns;
 import android.view.View;
 
 import java.util.ArrayList;
@@ -30,7 +33,22 @@ public class ViewAllQuotesActivity extends AppCompatActivity {
         {
             this.quotes_list.add(new Quote(x));
         }
-        setAdapter();
+        QuoteReaderDbHelper mDbHelper = new QuoteReaderDbHelper(this.getApplicationContext());
+        SQLiteDatabase db = mDbHelper.getReadableDatabase();
+        String[] projection = {
+                BaseColumns._ID, QuoteReaderContract.QuoteEntry.COLUMN_QUOTE_TEXT,
+                QuoteReaderContract.QuoteEntry.COLUMN_QUOTE_PERSON};
+    String selection = QuoteReaderContract.QuoteEntry.COLUMN_QUOTE_TEXT + " = ?";
+    String[] selectionArgs = { "*" };
+    String sortOrder = QuoteReaderContract.QuoteEntry.COLUMN_QUOTE_TEXT + " DESC";
+
+    Cursor result = db.query(QuoteReaderContract.QuoteEntry.TABLE_NAME, projection, selection,
+            selectionArgs, null, null, sortOrder);
+   while (result.moveToNext())
+   {
+       this.quotes_list.add(new Quote(result.getString(result.getColumnIndexOrThrow(QuoteReaderContract.QuoteEntry._ID))));
+   }
+    setAdapter();
     }
 
     public void endActivity(View view)
