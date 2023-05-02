@@ -24,6 +24,7 @@ public class AddQuoteActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_add_quote);
+        //emptyDB();
         this.editText_quote = findViewById(R.id.editText_quote_addQuote);
         QuoteReaderDbHelper mDbHelper = new QuoteReaderDbHelper(this.getApplicationContext());
         //System.out.println(mDbHelper.getDatabaseName());
@@ -51,6 +52,13 @@ public class AddQuoteActivity extends AppCompatActivity {
     public void onBack(View view)
     {
         finish();
+    }
+    private void emptyDB()
+    {
+        QuoteReaderDbHelper dbHelper = new QuoteReaderDbHelper(getApplicationContext());
+        SQLiteDatabase db = dbHelper.getWritableDatabase();
+        db.delete(QuoteReaderContract.QuoteEntry.TABLE_NAME, null, null);
+        dbHelper.close();
     }
 
 
