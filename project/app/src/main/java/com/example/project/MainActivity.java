@@ -8,6 +8,7 @@ import androidx.appcompat.app.AppCompatActivity;
 import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
+import android.database.sqlite.SQLiteDatabase;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.ArrayAdapter;
@@ -57,48 +58,25 @@ public class MainActivity extends AppCompatActivity {
     public void onAddQuote(View view)
     {
         Intent intent = new Intent(this, AddQuoteActivity.class);
-        addQuoteLauncher.launch(intent);
+        startActivity(intent);
     }
     public void onShowAllQuotes(View view)
     {
-        ArrayList<String> stringQuotes = new ArrayList<>();
-        System.out.println("size of list: " + this.quotes_list.size() + "\n");
+
         Intent intent = new Intent(MainActivity.this, ViewAllQuotesActivity.class);
-        for (Quote test: quotes_list) {
-        stringQuotes.add(test.getQuoteText());
-        }
-        intent.putExtra("list",stringQuotes);
         startActivity(intent);
+    }
+    public void emptyDB(View view)
+    {
+        QuoteReaderDbHelper dbHelper = new QuoteReaderDbHelper(getApplicationContext());
+        SQLiteDatabase db = dbHelper.getWritableDatabase();
+        db.delete(QuoteReaderContract.QuoteEntry.TABLE_NAME, null, null);
+        dbHelper.close();
     }
 
     private void initialPopulation()
     {
-        quotes_list.add(new Quote("If you can see yourself, you'll never be truly blind"));
-        quotes_list.add(new Quote("Be the change you wish to see in the world."));
-        quotes_list.add(new Quote( "The only way to do great work is to love what you do."));
-        quotes_list.add(new Quote("In three words I can sum up everything I've learned about life: it goes on."));
-        quotes_list.add(new Quote("Believe you can and you're halfway there."));
-        quotes_list.add(new Quote( "Don't let yesterday take up too much of today."));
+        System.out.println("test");
     }
-    @Override
-    protected void onActivityResult(int requestCode, int resultCode, Intent data) {
-        super.onActivityResult(requestCode, resultCode, data);
-
-        if (requestCode == RESULT_ADD_QUOTE && resultCode == RESULT_OK) {
-            String newQuote = data.getStringExtra("newQuote");
-            quotes_list.add(new Quote(newQuote));
-        }
-    }
-    private ActivityResultLauncher<Intent> addQuoteLauncher = registerForActivityResult(
-            new ActivityResultContracts.StartActivityForResult(),
-            result -> {
-                if (result.getResultCode() == Activity.RESULT_OK) {
-                    Intent data = result.getData();
-                    if (data != null) {
-                        String newQuote = data.getStringExtra("newQuote");
-                        quotes_list.add(new Quote(newQuote));
-                    }
-                }
-            });
 
 }

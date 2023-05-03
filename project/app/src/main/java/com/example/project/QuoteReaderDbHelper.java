@@ -17,7 +17,9 @@ public class QuoteReaderDbHelper extends SQLiteOpenHelper {
             "CREATE TABLE " + QuoteReaderContract.QuoteEntry.TABLE_NAME + " (" +
                     QuoteReaderContract.QuoteEntry._ID + " INTEGER PRIMARY KEY, " +
                     QuoteReaderContract.QuoteEntry.COLUMN_QUOTE_TEXT + " TEXT, " +
-                    QuoteReaderContract.QuoteEntry.COLUMN_QUOTE_PERSON + " TEXT)";
+                    QuoteReaderContract.QuoteEntry.COLUMN_QUOTE_PERSON + " TEXT, " +
+                    QuoteReaderContract.QuoteEntry.COLUMN_QUOTE_DATE + " TEXT " +
+                    ")";
 
     private static final String SQL_DELETE_ENTRIES =
             "DROP TABLE IF EXISTS " + QuoteReaderContract.QuoteEntry.TABLE_NAME;

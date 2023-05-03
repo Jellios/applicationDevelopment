@@ -13,7 +13,13 @@ import android.os.Bundle;
 import android.provider.BaseColumns;
 import android.view.View;
 
+import java.text.DateFormat;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Calendar;
+import java.util.Date;
+import java.util.Locale;
 
 public class ViewAllQuotesActivity extends AppCompatActivity {
 
@@ -33,15 +39,18 @@ public class ViewAllQuotesActivity extends AppCompatActivity {
 
 // Define a projection that specifies which columns from the database
 // you will actually use after this query.
+
+
         String[] projection = {
                 BaseColumns._ID,
                 QuoteReaderContract.QuoteEntry.COLUMN_QUOTE_TEXT,
-                QuoteReaderContract.QuoteEntry.COLUMN_QUOTE_PERSON
+                QuoteReaderContract.QuoteEntry.COLUMN_QUOTE_PERSON,
+                QuoteReaderContract.QuoteEntry.COLUMN_QUOTE_DATE,
         };
 
 // Define a sortOrder for the query
         String sortOrder =
-                QuoteReaderContract.QuoteEntry.COLUMN_QUOTE_TEXT + " DESC";
+                QuoteReaderContract.QuoteEntry.COLUMN_QUOTE_TEXT + " ASC";
 
 // Perform a query on the database
         Cursor cursor = db.query(
@@ -60,7 +69,9 @@ public class ViewAllQuotesActivity extends AppCompatActivity {
             long id = cursor.getLong(cursor.getColumnIndexOrThrow(QuoteReaderContract.QuoteEntry._ID));
             String text = cursor.getString(cursor.getColumnIndexOrThrow(QuoteReaderContract.QuoteEntry.COLUMN_QUOTE_TEXT));
             String person = cursor.getString(cursor.getColumnIndexOrThrow(QuoteReaderContract.QuoteEntry.COLUMN_QUOTE_PERSON));
-            this.quotes_list.add(new Quote(text));
+            String date = cursor.getString(cursor.getColumnIndexOrThrow(QuoteReaderContract.QuoteEntry.COLUMN_QUOTE_DATE));
+            this.quotes_list.add(new Quote(text,person,date));
+
         }
 
 // Close the Cursor and the database
@@ -86,11 +97,6 @@ public class ViewAllQuotesActivity extends AppCompatActivity {
     }
 
     private void setQuoteInfo() {
-        quotes_list.add(new Quote("If you can see yourself, you'll never be truly blind"));
-        quotes_list.add(new Quote("Be the change you wish to see in the world."));
-        quotes_list.add(new Quote( "The only way to do great work is to love what you do."));
-        quotes_list.add(new Quote("In three words I can sum up everything I've learned about life: it goes on."));
-        quotes_list.add(new Quote("Believe you can and you're halfway there."));
-        quotes_list.add(new Quote( "Don't let yesterday take up too much of today."));
+       System.out.println("test");
     }
 }

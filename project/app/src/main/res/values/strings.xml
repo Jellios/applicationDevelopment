@@ -6,4 +6,6 @@
     <string name="nav_add_quote">Add Quote</string>
     <string name="back">Back</string>
     <string name="quotePrompt">Quote text: </string>
+    <string name="quote_author">Quote author: </string>
+    <string name="quote_date">Quote date: </string>
 </resources>

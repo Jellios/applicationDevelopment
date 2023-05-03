@@ -19,6 +19,8 @@ import java.util.ArrayList;
 public class AddQuoteActivity extends AppCompatActivity {
 
     private EditText editText_quote;
+    private EditText editText_author;
+    private EditText editText_date;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -26,6 +28,8 @@ public class AddQuoteActivity extends AppCompatActivity {
         setContentView(R.layout.activity_add_quote);
         //emptyDB();
         this.editText_quote = findViewById(R.id.editText_quote_addQuote);
+        this.editText_author = findViewById(R.id.edit_text_quotePerson_addQuote);
+        this.editText_date = findViewById(R.id.edit_text_quoteDate_addQuote);
         QuoteReaderDbHelper mDbHelper = new QuoteReaderDbHelper(this.getApplicationContext());
         //System.out.println(mDbHelper.getDatabaseName());
         SQLiteDatabase db = mDbHelper.getWritableDatabase();
@@ -34,16 +38,13 @@ public class AddQuoteActivity extends AppCompatActivity {
     {
 
         String newQuote = editText_quote.getText().toString();
-        Intent intent = new Intent();
-        intent.putExtra("newQuote", newQuote);
-        setResult(MainActivity.RESULT_ADD_QUOTE, intent);
         QuoteReaderDbHelper mDbHelper = new QuoteReaderDbHelper(this.getApplicationContext());
         //System.out.println(mDbHelper.getDatabaseName());
         SQLiteDatabase db = mDbHelper.getWritableDatabase();
         ContentValues values = new ContentValues();
         values.put(QuoteReaderContract.QuoteEntry.COLUMN_QUOTE_TEXT, newQuote);
-        values.put(QuoteReaderContract.QuoteEntry.COLUMN_QUOTE_PERSON, "jelle");
-
+        values.put(QuoteReaderContract.QuoteEntry.COLUMN_QUOTE_PERSON,this.editText_author.getText().toString());
+        values.put(QuoteReaderContract.QuoteEntry.COLUMN_QUOTE_DATE, this.editText_date.getText().toString());
         long newRowId = db.insert(QuoteReaderContract.QuoteEntry.TABLE_NAME, null, values);
 
         finish();
