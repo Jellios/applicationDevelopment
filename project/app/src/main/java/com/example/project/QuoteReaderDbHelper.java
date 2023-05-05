@@ -1,6 +1,7 @@
 package com.example.project;
 
 import android.content.Context;
+import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteOpenHelper;
 
@@ -32,6 +33,25 @@ public class QuoteReaderDbHelper extends SQLiteOpenHelper {
     {
         db.execSQL(SQL_DELETE_ENTRIES);
         onCreate(db);
+    }
+    public Quote getRandomQuote() {
+        SQLiteDatabase db = getReadableDatabase();
+
+        Cursor cursor = db.rawQuery("SELECT * FROM " + QuoteReaderContract.QuoteEntry.TABLE_NAME +
+                " ORDER BY RANDOM() LIMIT 1", null);
+
+        if (cursor != null) {
+            cursor.moveToFirst();
+        }
+
+        Quote quote = new Quote();
+        quote.setQuoteText(cursor.getString(cursor.getColumnIndexOrThrow(QuoteReaderContract.QuoteEntry.COLUMN_QUOTE_TEXT)));
+        quote.setQuoteDate(cursor.getString(cursor.getColumnIndexOrThrow(QuoteReaderContract.QuoteEntry.COLUMN_QUOTE_PERSON)));
+        quote.setQuoteDate(cursor.getString(cursor.getColumnIndexOrThrow(QuoteReaderContract.QuoteEntry.COLUMN_QUOTE_DATE)));
+
+        cursor.close();
+
+        return quote;
     }
 
 }

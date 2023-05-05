@@ -6,11 +6,13 @@ import androidx.activity.result.contract.ActivityResultContracts;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.app.Activity;
+import android.content.ContentValues;
 import android.content.Context;
 import android.content.Intent;
 import android.database.sqlite.SQLiteDatabase;
 import android.os.Bundle;
 import android.view.View;
+import android.view.ViewGroup;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.ListView;
@@ -18,6 +20,7 @@ import android.widget.ScrollView;
 import android.widget.TextView;
 
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.Random;
 
 public class MainActivity extends AppCompatActivity {
@@ -29,32 +32,46 @@ public class MainActivity extends AppCompatActivity {
 
     private Button btn_ViewQuotes;
 
-    private String[] quotes = {
-            "Be the change you wish to see in the world.",
-            "The only way to do great work is to love what you do.",
-            "In three words I can sum up everything I've learned about life: it goes on.",
-            "Believe you can and you're halfway there.",
-            "Don't let yesterday take up too much of today."
-    };
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+
         this.quotes_list = new ArrayList<>();
         this.tv_randomQuote = findViewById(R.id.tv_main_quote);
-        int rndm = new Random().nextInt(this.quotes.length);
-        this.tv_randomQuote.setText(this.quotes[rndm]);
+
+       // this.setRandomQuote();
         this.initialPopulation();
 
 
     }
-    public void setRandomQuote(View view)
+    public void triggerRandomQuote(View view)
     {
-        int limit = this.quotes.length;
-        int rand = (int)(Math.random()*limit);
-        this.tv_randomQuote.setText(this.quotes[rand]);
-
+        this.setRandomQuote();
     }
+    public void setRandomQuote()
+    {
+        // Create a new instance of your QuoteReaderDbHelper
+        QuoteReaderDbHelper dbHelper = new QuoteReaderDbHelper(getApplicationContext());
+
+        // Get a random quote from the database
+        Quote randomQuote = dbHelper.getRandomQuote();
+
+        // Check if the quote is not null
+        if (randomQuote != null) {
+            // Set the tv_randomQuote text to the text of the random quote
+            tv_randomQuote.setText(randomQuote.getQuoteText() + "\n\n - " + randomQuote.getQuoteAuthor());
+        } else {
+            // If the quote is null (there are no quotes in the database), display a default message
+            tv_randomQuote.setText("No quotes available.");
+        }
+
+        // Close the dbHelper
+        dbHelper.close();
+    }
+
+
     public void onAddQuote(View view)
     {
         Intent intent = new Intent(this, AddQuoteActivity.class);
@@ -71,6 +88,31 @@ public class MainActivity extends AppCompatActivity {
         QuoteReaderDbHelper dbHelper = new QuoteReaderDbHelper(getApplicationContext());
         SQLiteDatabase db = dbHelper.getWritableDatabase();
         db.delete(QuoteReaderContract.QuoteEntry.TABLE_NAME, null, null);
+        dbHelper.close();
+    }
+    public void bogusQuotes(View view) {
+        QuoteReaderDbHelper dbHelper = new QuoteReaderDbHelper(getApplicationContext());
+        SQLiteDatabase db = dbHelper.getWritableDatabase();
+
+        for (int i = 1; i <= 20; i++) {
+            String quoteText = "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed non risus. " +
+                    "Suspendisse lectus tortor, dignissim sit amet, adipiscing nec, " +
+                    "Suspendisse lectus tortor, dignissim sit amet, adipiscing nec, " +
+                    "Suspendisse lectus tortor, dignissim sit amet, adipiscing nec, " +
+                    "Suspendisse lectus tortor, dignissim sit amet, adipiscing nec, " +
+                    "Suspendisse lectus tortor, dignissim sit amet, adipiscing nec, " +
+                    "Suspendisse lectus tortor, dignissim sit amet, adipiscing nec, " +
+                    "ultricies sed, dolor. Cras elementum ultrices diam. Maecenas ligula massa, " +
+                    "varius a, semper congue, euismod non, mi. Proin porttitor, orci nec nonummy " +
+                    "molestie, enim est eleifend mi, non fermentum diam nisl sit amet erat.";
+            ContentValues values = new ContentValues();
+            values.put(QuoteReaderContract.QuoteEntry.COLUMN_QUOTE_TEXT, quoteText);
+            values.put(QuoteReaderContract.QuoteEntry.COLUMN_QUOTE_PERSON, "Author " + i);
+            values.put(QuoteReaderContract.QuoteEntry.COLUMN_QUOTE_DATE, new Date().toString());
+
+            db.insert(QuoteReaderContract.QuoteEntry.TABLE_NAME, null, values);
+        }
+
         dbHelper.close();
     }
 

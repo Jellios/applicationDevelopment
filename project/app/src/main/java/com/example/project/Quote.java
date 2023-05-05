@@ -31,6 +31,12 @@ public class Quote {
         this.quoteAuthor = author;
         this.quoteDate = writeDate;
     }
+    public Quote()
+    {
+        this.quoteText = "";
+        this.quoteAuthor = "";
+        this.quoteDate = "";
+    }
 
     public String getQuoteText() {
         return quoteText;
