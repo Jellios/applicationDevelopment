@@ -39,7 +39,10 @@ public class QuoteReaderDbHelper extends SQLiteOpenHelper {
 
         Cursor cursor = db.rawQuery("SELECT * FROM " + QuoteReaderContract.QuoteEntry.TABLE_NAME +
                 " ORDER BY RANDOM() LIMIT 1", null);
-
+        if (cursor.getCount() <= 0)
+        {
+            return null;
+        }
         if (cursor != null) {
             cursor.moveToFirst();
         }

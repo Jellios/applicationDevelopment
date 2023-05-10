@@ -8,4 +8,6 @@
     <string name="quotePrompt">Quote text: </string>
     <string name="quote_author">Quote author: </string>
     <string name="quote_date">Quote date: </string>
+    <string name="save_changes">Save changes</string>
+    <string name="delete_quote"><b>Delete quote</b></string>
 </resources>
