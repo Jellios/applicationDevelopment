@@ -25,6 +25,7 @@ public class recyclerAdapter extends RecyclerView.Adapter<recyclerAdapter.MyView
         private TextView quote_tv_person;
         private TextView quote_tv_date;
 
+        private TextView quote_tv_id;
 
 
 
@@ -35,6 +36,7 @@ public class recyclerAdapter extends RecyclerView.Adapter<recyclerAdapter.MyView
             quote_tv = view.findViewById(R.id.tv_quotes_list1);
             quote_tv_person = view.findViewById(R.id.quote_tv_person);
             quote_tv_date = view.findViewById(R.id.quote_tv_date);
+            quote_tv_id = view.findViewById(R.id.tv_quote_id);
 
         }
     }
@@ -48,12 +50,18 @@ public class recyclerAdapter extends RecyclerView.Adapter<recyclerAdapter.MyView
 
     @Override
     public void onBindViewHolder(@NonNull recyclerAdapter.MyViewHolder holder, int position) {
-            String quoteText = quoteList.get(position).getQuoteText();
-            String quoteDate = quoteList.get(position).getQuoteDate();
-            String quotePerson = quoteList.get(position).getQuoteAuthor();
-            holder.quote_tv.setText(quoteText);
-            holder.quote_tv_person.setText(quotePerson);
-            holder.quote_tv_date.setText(quoteDate);
+           // String quoteText = quoteList.get(position).getQuoteText();
+            //String quoteDate = quoteList.get(position).getQuoteDate();
+            //String quotePerson = quoteList.get(position).getQuoteAuthor();
+            //holder.quote_tv.setText(quoteText);
+            //holder.quote_tv_person.setText(quotePerson);
+            //holder.quote_tv_date.setText(quoteDate);
+
+        Quote quote = quoteList.get(position);
+        holder.quote_tv.setText(quote.getQuoteText());
+        holder.quote_tv_person.setText(quote.getQuoteAuthor());
+        holder.quote_tv_date.setText(quote.getQuoteDate());
+        holder.quote_tv_id.setText(String.valueOf(quote.getId()));
 
 
     }

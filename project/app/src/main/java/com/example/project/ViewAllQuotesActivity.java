@@ -13,6 +13,7 @@
     import android.view.LayoutInflater;
     import android.view.MotionEvent;
     import android.view.View;
+    import android.widget.Button;
     import android.widget.EditText;
     import android.widget.LinearLayout;
     import android.widget.PopupWindow;
@@ -49,7 +50,7 @@
 
     // Define a sortOrder for the query
             String sortOrder =
-                    QuoteReaderContract.QuoteEntry.COLUMN_QUOTE_TEXT + " ASC";
+                    QuoteReaderContract.QuoteEntry._ID + " ASC";
 
     // Perform a query on the database
             Cursor cursor = db.query(
@@ -65,11 +66,11 @@
     // Loop through the Cursor to get all the entries
 
             while (cursor.moveToNext()) {
-                long id = cursor.getLong(cursor.getColumnIndexOrThrow(QuoteReaderContract.QuoteEntry._ID));
+                int id = cursor.getInt(cursor.getColumnIndexOrThrow(QuoteReaderContract.QuoteEntry._ID));
                 String text = cursor.getString(cursor.getColumnIndexOrThrow(QuoteReaderContract.QuoteEntry.COLUMN_QUOTE_TEXT));
                 String person = cursor.getString(cursor.getColumnIndexOrThrow(QuoteReaderContract.QuoteEntry.COLUMN_QUOTE_PERSON));
                 String date = cursor.getString(cursor.getColumnIndexOrThrow(QuoteReaderContract.QuoteEntry.COLUMN_QUOTE_DATE));
-                this.quotes_list.add(new Quote(text,person,date));
+                this.quotes_list.add(new Quote(text,person,date,id));
 
             }
 
@@ -117,6 +118,7 @@
             author = quotePopupView.findViewById(R.id.popup_Quote_author);
             date = quotePopupView.findViewById(R.id.popup_quote_date);
 
+            TextView tv_id = view.findViewById(R.id.tv_quote_id);
             // Get the quote text from the clicked item
             TextView quoteTextView = view.findViewById(R.id.tv_quotes_list1);
             String quoteText = quoteTextView.getText().toString();
@@ -136,6 +138,36 @@
                     return true;
                 }
             });
+            Button btn_save_changes = quotePopupView.findViewById(R.id.btn_popup_saveChanges);
+            btn_save_changes.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View view) {
+                    String tmp = tv_id.getText().toString();
+                    int id = Integer.valueOf(tmp);
+
+                    QuoteReaderDbHelper dbHelper = new QuoteReaderDbHelper(view.getContext());
+                    SQLiteDatabase db = dbHelper.getWritableDatabase();
+
+                    dbHelper.updateQuote(id, text.getText().toString(),author.getText().toString(),date.getText().toString());
+                    popupWindow.dismiss();
+                    recreate();
+                }
+            });
+            Button btn_delete_quote = quotePopupView.findViewById(R.id.btn_popup_DeleteQuote);
+            btn_delete_quote.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    String tmp = tv_id.getText().toString();
+                    int id = Integer.valueOf(tmp);
+                    QuoteReaderDbHelper dbHelper = new QuoteReaderDbHelper(v.getContext());
+                    dbHelper.deleteQuote(id);
+                    dbHelper.close();
+                    popupWindow.dismiss();
+                   recreate();
+
+                }
+            });
         }
+
 
     }
