@@ -19,6 +19,7 @@ import android.widget.ListView;
 import android.widget.ScrollView;
 import android.widget.TextView;
 
+import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.Random;
@@ -61,7 +62,7 @@ public class MainActivity extends AppCompatActivity {
         // Check if the quote is not null
         if (randomQuote != null) {
             // Set the tv_randomQuote text to the text of the random quote
-            tv_randomQuote.setText(randomQuote.getQuoteText() + "\n\n - " + randomQuote.getQuoteAuthor());
+            tv_randomQuote.setText(randomQuote.getQuoteText() + "\n - " + randomQuote.getQuoteAuthor());
         } else {
             // If the quote is null (there are no quotes in the database), display a default message
             tv_randomQuote.setText("No quotes available.");
@@ -95,7 +96,7 @@ public class MainActivity extends AppCompatActivity {
         SQLiteDatabase db = dbHelper.getWritableDatabase();
 
         for (int i = 1; i <= 20; i++) {
-            String quoteText = "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed non risus. " +
+          /*  String quoteText = "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed non risus. " +
                     "Suspendisse lectus tortor, dignissim sit amet, adipiscing nec, " +
                     "Suspendisse lectus tortor, dignissim sit amet, adipiscing nec, " +
                     "Suspendisse lectus tortor, dignissim sit amet, adipiscing nec, " +
@@ -104,11 +105,14 @@ public class MainActivity extends AppCompatActivity {
                     "Suspendisse lectus tortor, dignissim sit amet, adipiscing nec, " +
                     "ultricies sed, dolor. Cras elementum ultrices diam. Maecenas ligula massa, " +
                     "varius a, semper congue, euismod non, mi. Proin porttitor, orci nec nonummy " +
-                    "molestie, enim est eleifend mi, non fermentum diam nisl sit amet erat.";
+                    "molestie, enim est eleifend mi, non fermentum diam nisl sit amet erat."; */
+
+            String quoteText = "dit is quote nummer: " + i + ".";
             ContentValues values = new ContentValues();
+            LocalDate localDate  = LocalDate.now();
             values.put(QuoteReaderContract.QuoteEntry.COLUMN_QUOTE_TEXT, quoteText);
             values.put(QuoteReaderContract.QuoteEntry.COLUMN_QUOTE_PERSON, "Author " + i);
-            values.put(QuoteReaderContract.QuoteEntry.COLUMN_QUOTE_DATE, new Date().toString());
+            values.put(QuoteReaderContract.QuoteEntry.COLUMN_QUOTE_DATE, localDate.toString());
 
             db.insert(QuoteReaderContract.QuoteEntry.TABLE_NAME, null, values);
         }

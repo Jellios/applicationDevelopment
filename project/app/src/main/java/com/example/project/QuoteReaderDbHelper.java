@@ -1,5 +1,6 @@
 package com.example.project;
 
+import android.content.ContentValues;
 import android.content.Context;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
@@ -34,6 +35,30 @@ public class QuoteReaderDbHelper extends SQLiteOpenHelper {
         db.execSQL(SQL_DELETE_ENTRIES);
         onCreate(db);
     }
+    public void updateQuote(int id, String text, String author, String date) {
+        SQLiteDatabase db = getWritableDatabase();
+
+        ContentValues values = new ContentValues();
+        values.put(QuoteReaderContract.QuoteEntry.COLUMN_QUOTE_TEXT, text);
+        values.put(QuoteReaderContract.QuoteEntry.COLUMN_QUOTE_PERSON, author);
+        values.put(QuoteReaderContract.QuoteEntry.COLUMN_QUOTE_DATE, date);
+
+        String selection = QuoteReaderContract.QuoteEntry._ID + " = ?";
+        String[] selectionArgs = { String.valueOf(id) };
+
+        int count = db.update(
+                QuoteReaderContract.QuoteEntry.TABLE_NAME,
+                values,
+                selection,
+                selectionArgs);
+
+        // check if the update was successful
+        if (count > 0) {
+            // success
+        } else {
+            // failed
+        }
+    }
     public Quote getRandomQuote() {
         SQLiteDatabase db = getReadableDatabase();
 
@@ -49,12 +74,17 @@ public class QuoteReaderDbHelper extends SQLiteOpenHelper {
 
         Quote quote = new Quote();
         quote.setQuoteText(cursor.getString(cursor.getColumnIndexOrThrow(QuoteReaderContract.QuoteEntry.COLUMN_QUOTE_TEXT)));
-        quote.setQuoteDate(cursor.getString(cursor.getColumnIndexOrThrow(QuoteReaderContract.QuoteEntry.COLUMN_QUOTE_PERSON)));
+        quote.setQuoteAuthor(cursor.getString(cursor.getColumnIndexOrThrow(QuoteReaderContract.QuoteEntry.COLUMN_QUOTE_PERSON)));
         quote.setQuoteDate(cursor.getString(cursor.getColumnIndexOrThrow(QuoteReaderContract.QuoteEntry.COLUMN_QUOTE_DATE)));
 
         cursor.close();
 
         return quote;
+    }
+    public void deleteQuote(int id) {
+        SQLiteDatabase db = this.getWritableDatabase();
+        db.delete(QuoteReaderContract.QuoteEntry.TABLE_NAME, QuoteReaderContract.QuoteEntry._ID + " = ?", new String[]{String.valueOf(id)});
+        db.close();
     }
 
 }
