@@ -30,15 +30,14 @@
         protected void onCreate(Bundle savedInstanceState) {
             super.onCreate(savedInstanceState);
             setContentView(R.layout.activity_view_all_quotes);
+            getSupportActionBar().hide();
             recyclerView = findViewById(R.id.AllQoutes_RCV);
             this.quotes_list = new ArrayList<>();
 
-            // Get a reference to the database
+
             QuoteReaderDbHelper dbHelper = new QuoteReaderDbHelper(this.getApplicationContext());
             SQLiteDatabase db = dbHelper.getReadableDatabase();
 
-    // Define a projection that specifies which columns from the database
-    // you will actually use after this query.
 
 
             String[] projection = {
@@ -48,22 +47,22 @@
                     QuoteReaderContract.QuoteEntry.COLUMN_QUOTE_DATE,
             };
 
-    // Define a sortOrder for the query
+
             String sortOrder =
                     QuoteReaderContract.QuoteEntry._ID + " ASC";
 
-    // Perform a query on the database
+
             Cursor cursor = db.query(
-                    QuoteReaderContract.QuoteEntry.TABLE_NAME,   // The table to query
-                    projection,                                 // The columns to return
-                    null,                                       // The columns for the WHERE clause
-                    null,                                       // The values for the WHERE clause
-                    null,                                       // don't group the rows
-                    null,                                       // don't filter by row groups
-                    sortOrder                                   // The sort order
+                    QuoteReaderContract.QuoteEntry.TABLE_NAME,
+                    projection,
+                    null,
+                    null,
+                    null,
+                    null,
+                    sortOrder
             );
 
-    // Loop through the Cursor to get all the entries
+
 
             while (cursor.moveToNext()) {
                 int id = cursor.getInt(cursor.getColumnIndexOrThrow(QuoteReaderContract.QuoteEntry._ID));
@@ -74,11 +73,11 @@
 
             }
 
-    // Close the Cursor and the database
+
             cursor.close();
             dbHelper.close();
 
-    // At this point, quotesList contains all the quotes from the quotes table
+
 
             setAdapter();
         }
@@ -119,7 +118,7 @@
             date = quotePopupView.findViewById(R.id.popup_quote_date);
 
             TextView tv_id = view.findViewById(R.id.tv_quote_id);
-            // Get the quote text from the clicked item
+
             TextView quoteTextView = view.findViewById(R.id.tv_quotes_list1);
             String quoteText = quoteTextView.getText().toString();
             text.setText(quoteText);
@@ -127,10 +126,10 @@
             TextView quoteDate = view.findViewById(R.id.quote_tv_date);
             author.setText(quoteAuthor.getText().toString());
             date.setText(quoteDate.getText().toString());
-            // Show the popup window
+
             popupWindow.showAtLocation(view, Gravity.CENTER, 0, 0);
 
-            // Dismiss the popup window when the user touches outside of it
+
             quotePopupView.setOnTouchListener(new View.OnTouchListener() {
                 @Override
                 public boolean onTouch(View v, MotionEvent event) {

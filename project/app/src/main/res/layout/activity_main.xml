@@ -7,21 +7,11 @@
     android:verticalScrollbarPosition="defaultPosition"
     tools:context=".MainActivity">
 
-    <Button
-        android:id="@+id/Dashboard"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="5dp"
-        android:layout_marginTop="1dp"
-        android:text="@string/nav_Home"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
-
 
     <ScrollView
         android:id="@+id/scrollView2"
-        android:layout_width="254dp"
-        android:layout_height="119dp"
+        android:layout_width="255dp"
+        android:layout_height="212dp"
         android:layout_marginTop="164dp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHeight_default="wrap"
@@ -53,10 +43,13 @@
         android:id="@+id/btn_main_show_quote"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginStart="96dp"
-        android:layout_marginTop="73dp"
+        android:layout_marginStart="118dp"
+        android:layout_marginTop="155dp"
+        android:layout_marginEnd="118dp"
         android:onClick="triggerRandomQuote"
         android:text="@string/show_random"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/scrollView2" />
 
@@ -64,43 +57,24 @@
         android:id="@+id/btn_main_view_all"
         android:layout_width="170dp"
         android:layout_height="49dp"
-        android:layout_marginStart="10dp"
-        android:layout_marginTop="1dp"
+        android:layout_marginStart="8dp"
+        android:layout_marginTop="12dp"
         android:onClick="onShowAllQuotes"
         android:text="@string/nav_view_all"
-        app:layout_constraintStart_toEndOf="@+id/Dashboard"
+        app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
     <Button
         android:id="@+id/button"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginStart="10dp"
-        android:layout_marginTop="1dp"
+        android:layout_marginStart="126dp"
+        android:layout_marginTop="12dp"
+        android:layout_marginEnd="8dp"
         android:onClick="onAddQuote"
         android:text="@string/nav_add_quote"
+        app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toEndOf="@+id/btn_main_view_all"
         app:layout_constraintTop_toTopOf="parent" />
 
-    <Button
-        android:id="@+id/button2"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="156dp"
-        android:layout_marginTop="17dp"
-        android:onClick="emptyDB"
-        android:text="empty db"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/btn_main_show_quote" />
-
-    <Button
-        android:id="@+id/button4"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="128dp"
-        android:layout_marginTop="32dp"
-        android:onClick="bogusQuotes"
-        android:text="Bogus Quotes"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/button2" />
 </androidx.constraintlayout.widget.ConstraintLayout>

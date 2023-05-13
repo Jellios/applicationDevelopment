@@ -52,12 +52,8 @@ public class QuoteReaderDbHelper extends SQLiteOpenHelper {
                 selection,
                 selectionArgs);
 
-        // check if the update was successful
-        if (count > 0) {
-            // success
-        } else {
-            // failed
-        }
+
+
     }
     public Quote getRandomQuote() {
         SQLiteDatabase db = getReadableDatabase();

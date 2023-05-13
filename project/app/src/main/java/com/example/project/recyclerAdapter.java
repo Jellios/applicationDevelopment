@@ -13,7 +13,7 @@ import java.util.ArrayList;
 
 public class recyclerAdapter extends RecyclerView.Adapter<recyclerAdapter.MyViewHolder> {
 
-    private ArrayList<Quote> quoteList;
+    private final ArrayList<Quote> quoteList;
 
     public recyclerAdapter(ArrayList<Quote> quoteList)
     {
@@ -21,11 +21,11 @@ public class recyclerAdapter extends RecyclerView.Adapter<recyclerAdapter.MyView
     }
 
     public class MyViewHolder extends RecyclerView.ViewHolder {
-        private TextView quote_tv;
-        private TextView quote_tv_person;
-        private TextView quote_tv_date;
+        private final TextView quote_tv;
+        private final TextView quote_tv_person;
+        private final TextView quote_tv_date;
 
-        private TextView quote_tv_id;
+        private final TextView quote_tv_id;
 
 
 
@@ -50,12 +50,7 @@ public class recyclerAdapter extends RecyclerView.Adapter<recyclerAdapter.MyView
 
     @Override
     public void onBindViewHolder(@NonNull recyclerAdapter.MyViewHolder holder, int position) {
-           // String quoteText = quoteList.get(position).getQuoteText();
-            //String quoteDate = quoteList.get(position).getQuoteDate();
-            //String quotePerson = quoteList.get(position).getQuoteAuthor();
-            //holder.quote_tv.setText(quoteText);
-            //holder.quote_tv_person.setText(quotePerson);
-            //holder.quote_tv_date.setText(quoteDate);
+
 
         Quote quote = quoteList.get(position);
         holder.quote_tv.setText(quote.getQuoteText());
