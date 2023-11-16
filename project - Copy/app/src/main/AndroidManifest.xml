@@ -11,11 +11,7 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.AppCompat"
         tools:targetApi="31">
-        <provider
-            android:name=".MyContentProvider"
-            android:authorities="com.example.project"
-            android:enabled="true"
-            android:exported="true"></provider>
+
 
         <activity
             android:name=".ViewAllQuotesActivity"
