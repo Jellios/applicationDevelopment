@@ -4,9 +4,11 @@ import androidx.activity.result.ActivityResultLauncher;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.app.Activity;
+import android.content.ContentResolver;
 import android.content.ContentValues;
 import android.content.Intent;
 import android.database.sqlite.SQLiteDatabase;
+import android.net.Uri;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.EditText;
@@ -38,15 +40,32 @@ public class AddQuoteActivity extends AppCompatActivity {
 
     public void onConfirm(View view) {
 
-        String newQuote = editText_quote.getText().toString();
-        QuoteReaderDbHelper mDbHelper = new QuoteReaderDbHelper(this.getApplicationContext());
+        for (int i = 0; i < 50; i++)
+        {
+            String newQuote = editText_quote.getText().toString();
+            String author = editText_author.getText().toString();
+            String date = editText_date.getText().toString();
 
-        SQLiteDatabase db = mDbHelper.getWritableDatabase();
-        ContentValues values = new ContentValues();
-        values.put(QuoteReaderContract.QuoteEntry.COLUMN_QUOTE_TEXT, newQuote);
-        values.put(QuoteReaderContract.QuoteEntry.COLUMN_QUOTE_PERSON, this.editText_author.getText().toString());
-        values.put(QuoteReaderContract.QuoteEntry.COLUMN_QUOTE_DATE, this.editText_date.getText().toString());
-        long newRowId = db.insert(QuoteReaderContract.QuoteEntry.TABLE_NAME, null, values);
+            ContentValues values = new ContentValues();
+            values.put(QuoteReaderContract.QuoteEntry.COLUMN_QUOTE_TEXT, newQuote);
+            values.put(QuoteReaderContract.QuoteEntry.COLUMN_QUOTE_PERSON, author);
+            values.put(QuoteReaderContract.QuoteEntry.COLUMN_QUOTE_DATE, date);
+
+            ContentResolver contentResolver = getContentResolver();
+
+// Use the content resolver to insert the new quote
+            Uri newQuoteUri = contentResolver.insert(QuoteReaderContract.QuoteEntry.CONTENT_URI_QUOTES, values);
+
+// The new row ID can be obtained from the URI
+            long newRowId;
+            if (newQuoteUri != null) {
+                newRowId = Long.parseLong(newQuoteUri.getLastPathSegment());
+            } else {
+                // Handle the error case if the insertion fails
+                newRowId = -1;
+            }
+        }
+
 
         finish();
 

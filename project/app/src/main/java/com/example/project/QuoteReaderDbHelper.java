@@ -1,5 +1,6 @@
 package com.example.project;
 
+import android.content.ContentResolver;
 import android.content.ContentValues;
 import android.content.Context;
 import android.database.Cursor;
@@ -36,23 +37,6 @@ public class QuoteReaderDbHelper extends SQLiteOpenHelper {
         onCreate(db);
     }
     public void updateQuote(int id, String text, String author, String date) {
-        SQLiteDatabase db = getWritableDatabase();
-
-        ContentValues values = new ContentValues();
-        values.put(QuoteReaderContract.QuoteEntry.COLUMN_QUOTE_TEXT, text);
-        values.put(QuoteReaderContract.QuoteEntry.COLUMN_QUOTE_PERSON, author);
-        values.put(QuoteReaderContract.QuoteEntry.COLUMN_QUOTE_DATE, date);
-
-        String selection = QuoteReaderContract.QuoteEntry._ID + " = ?";
-        String[] selectionArgs = { String.valueOf(id) };
-
-        int count = db.update(
-                QuoteReaderContract.QuoteEntry.TABLE_NAME,
-                values,
-                selection,
-                selectionArgs);
-
-
 
     }
     public Quote getRandomQuote() {
@@ -76,11 +60,13 @@ public class QuoteReaderDbHelper extends SQLiteOpenHelper {
         cursor.close();
 
         return quote;
+
+
+
+
     }
     public void deleteQuote(int id) {
-        SQLiteDatabase db = this.getWritableDatabase();
-        db.delete(QuoteReaderContract.QuoteEntry.TABLE_NAME, QuoteReaderContract.QuoteEntry._ID + " = ?", new String[]{String.valueOf(id)});
-        db.close();
+
     }
 
 }

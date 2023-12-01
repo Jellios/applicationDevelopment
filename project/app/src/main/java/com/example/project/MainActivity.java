@@ -41,7 +41,7 @@ public class MainActivity extends AppCompatActivity {
         getSupportActionBar().hide();
         this.quotes_list = new ArrayList<>();
         this.tv_randomQuote = findViewById(R.id.tv_main_quote);
-
+        System.out.println("test");
         this.setRandomQuote();
 
 
