@@ -40,7 +40,8 @@ public class AddQuoteActivity extends AppCompatActivity {
 
     public void onConfirm(View view) {
 
-
+        for (int i = 0; i < 50; i++)
+        {
             String newQuote = editText_quote.getText().toString();
             String author = editText_author.getText().toString();
             String date = editText_date.getText().toString();
@@ -63,7 +64,7 @@ public class AddQuoteActivity extends AppCompatActivity {
                 // Handle the error case if the insertion fails
                 newRowId = -1;
             }
-
+        }
 
 
         finish();
