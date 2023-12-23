@@ -1,6 +1,11 @@
-<?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <style name="GreenText" parent="TextAppearance.AppCompat">
-        <item name="android:textColor">#00FF00</item>
+    <!-- Base application theme. -->
+    <style name="AppTheme" parent="Theme.MaterialComponents">
+        <!-- Customize your theme here. -->
+        <item name="colorPrimary">#BB86FC</item> <!-- Purple 200 -->
+        <item name="colorPrimaryDark">#3700B3</item> <!-- Purple 700 -->
+        <item name="colorAccent">#03DAC6</item> <!-- Teal 200 -->
+        <item name="android:windowBackground">#1A237E</item> <!-- Background color -->
+        <item name="android:textColor">#FFFFFF</item> <!-- Text color -->
     </style>
 </resources>

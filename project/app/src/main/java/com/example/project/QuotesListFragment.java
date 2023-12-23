@@ -8,12 +8,16 @@ import android.widget.AdapterView;
 import android.widget.ListView;
 
 import androidx.fragment.app.Fragment;
+import androidx.recyclerview.widget.DividerItemDecoration;
+import androidx.recyclerview.widget.LinearLayoutManager;
+import androidx.recyclerview.widget.RecyclerView;
 
 import java.util.ArrayList;
 
 public class QuotesListFragment extends Fragment {
 
     private OnQuoteSelectedListener callback;
+    private recyclerAdapter adapter;
 
     public interface OnQuoteSelectedListener {
         void onQuoteSelected(Quote quote);
@@ -27,24 +31,36 @@ public class QuotesListFragment extends Fragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.fragment_quotes_list, container, false);
 
-        ListView listView = view.findViewById(R.id.list_view_quotes);
-        ArrayList<Quote> quotes = getQuotes(); // Implement this method to get the list of quotes from your database
+        // Initialize RecyclerView
+        RecyclerView recyclerView = view.findViewById(R.id.recycler_view_quotes);
 
-        // Set up the adapter and list view
-        // Assume QuoteAdapter is a custom adapter for displaying Quote objects
-        QuoteAdapter adapter = new QuoteAdapter(getActivity(), quotes);
-        listView.setAdapter(adapter);
+        // Initialize the adapter
+        adapter = new recyclerAdapter(new ArrayList<>());
 
-        listView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
-            @Override
-            public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-                if (callback != null) {
-                    Quote quote = (Quote) parent.getItemAtPosition(position);
-                    callback.onQuoteSelected(quote);
-                }
-            }
-        });
+        // Set the adapter for the RecyclerView
+        recyclerView.setAdapter(adapter);
+
+        // Set the layout manager for the RecyclerView
+        recyclerView.setLayoutManager(new LinearLayoutManager(getContext()));
+
+        DividerItemDecoration dividerItemDecoration = new DividerItemDecoration(recyclerView.getContext(), LinearLayoutManager.VERTICAL);
+        recyclerView.addItemDecoration(dividerItemDecoration);
 
         return view;
+    }
+
+    public void setQuoteList(ArrayList<Quote> quoteList) {
+        // Update the data in the adapter
+        adapter.setQuoteList(quoteList);
+
+        // Notify the adapter that the data has changed
+        adapter.notifyDataSetChanged();
+    }
+    public void refreshQuotesList() {
+        // Fetch the updated list of quotes from the database
+        ArrayList<Quote> updatedQuotes = ((MainActivity2)getActivity()).fetchQuotesFromDatabase();
+
+        // Update the quote list in the adapter
+        setQuoteList(updatedQuotes);
     }
 }

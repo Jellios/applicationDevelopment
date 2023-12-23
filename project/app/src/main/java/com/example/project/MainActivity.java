@@ -76,7 +76,11 @@ public class MainActivity extends AppCompatActivity {
         Intent intent = new Intent(this, AddQuoteActivity.class);
         startActivity(intent);
     }
-
+    public void onTestActivity(View view)
+    {
+        Intent intent = new Intent(this, MainActivity2.class);
+        startActivity(intent);
+    }
     public void onShowAllQuotes(View view) {
 
         Intent intent = new Intent(MainActivity.this, ViewAllQuotesActivity.class);

@@ -5,7 +5,9 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:verticalScrollbarPosition="defaultPosition"
-    tools:context=".MainActivity">
+    tools:context=".MainActivity"
+    android:background="@color/cardview_dark_background"
+    >
 
 
     <ScrollView
@@ -52,6 +54,21 @@
         app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/scrollView2" />
+
+    <Button
+        android:id="@+id/btn_test_activity"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="118dp"
+        android:layout_marginTop="210dp"
+        android:layout_marginEnd="118dp"
+        android:onClick="onTestActivity"
+        android:text="@string/show_allQuotesWithFragments"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/scrollView2"
+        tools:text="@string/show_allQuotesWithFragments" />
 
     <Button
         android:id="@+id/btn_main_view_all"

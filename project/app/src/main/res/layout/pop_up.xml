@@ -5,7 +5,7 @@
     android:layout_width="400dp"
     android:layout_height="match_parent"
     android:background="@android:drawable/editbox_dropdown_dark_frame"
-    android:backgroundTint="@color/black"
+    android:backgroundTint="@color/colorOnSecondary"
     android:outlineProvider="bounds"
     android:theme="@style/ShapeAppearanceOverlay.MaterialAlertDialog.Material3"
     android:translationZ="4dp">
