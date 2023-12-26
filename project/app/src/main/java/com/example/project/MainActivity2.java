@@ -58,24 +58,14 @@ public class MainActivity2 extends AppCompatActivity implements QuotesListFragme
 
     @Override
     public void onQuoteSelected(Quote quote) {
-        // Update the QuoteDetailFragment with the selected quote
+        // Create a new QuoteDetailFragment
+        QuoteDetailFragment quoteDetailFragment = new QuoteDetailFragment();
         quoteDetailFragment.setQuote(quote);
 
-        // Get the FrameLayout
-        FrameLayout fragmentContainer = findViewById(R.id.fragment_container);
-
-        // Make the FrameLayout visible and set its height to match_parent
-        fragmentContainer.setVisibility(View.VISIBLE);
-        LinearLayout.LayoutParams params = new LinearLayout.LayoutParams(
-                LinearLayout.LayoutParams.MATCH_PARENT,
-                0,
-                1.0f
-        );
-        fragmentContainer.setLayoutParams(params);
-
-        // Replace the existing QuoteDetailFragment (if any) with the new one
+        // Replace the fragment in fragment_container
         getSupportFragmentManager().beginTransaction()
                 .replace(R.id.fragment_container, quoteDetailFragment)
+                .addToBackStack(null)
                 .commit();
     }
 

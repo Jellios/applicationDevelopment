@@ -39,12 +39,18 @@ public class QuoteDetailFragment extends Fragment {
         // Initialize the save and delete buttons
         Button saveButton = view.findViewById(R.id.button_save);
         Button deleteButton = view.findViewById(R.id.button_delete);
-
+        Button discardButton = view.findViewById(R.id.discard_button);
         // Set the click listeners for the buttons
         saveButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 saveQuote(v);
+                removeFragment();
+            }
+        });
+        discardButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
                 removeFragment();
             }
         });
