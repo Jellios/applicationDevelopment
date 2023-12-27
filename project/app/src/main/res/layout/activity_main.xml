@@ -46,7 +46,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginStart="118dp"
-        android:layout_marginTop="155dp"
+        android:layout_marginTop="44dp"
         android:layout_marginEnd="118dp"
         android:onClick="triggerRandomQuote"
         android:text="@string/show_random"
@@ -60,7 +60,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginStart="118dp"
-        android:layout_marginTop="210dp"
+        android:layout_marginTop="112dp"
         android:layout_marginEnd="118dp"
         android:onClick="onTestActivity"
         android:text="@string/show_allQuotesWithFragments"
@@ -93,5 +93,16 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toEndOf="@+id/btn_main_view_all"
         app:layout_constraintTop_toTopOf="parent" />
+
+    <Button
+        android:id="@+id/button2"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="118dp"
+        android:layout_marginTop="24dp"
+        android:onClick="onTempActivity"
+        android:text="temp"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/btn_test_activity" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

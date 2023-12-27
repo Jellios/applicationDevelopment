@@ -38,7 +38,7 @@ public class MainActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
-        getSupportActionBar().hide();
+        getSupportActionBar();
         this.quotes_list = new ArrayList<>();
         this.tv_randomQuote = findViewById(R.id.tv_main_quote);
         System.out.println("test");
@@ -79,6 +79,11 @@ public class MainActivity extends AppCompatActivity {
     public void onTestActivity(View view)
     {
         Intent intent = new Intent(this, MainActivity2.class);
+        startActivity(intent);
+    }
+    public void onTempActivity(View view)
+    {
+        Intent intent = new Intent(this, ToolbarActivity.class);
         startActivity(intent);
     }
     public void onShowAllQuotes(View view) {
