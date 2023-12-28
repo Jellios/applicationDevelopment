@@ -1,7 +1,11 @@
 package com.example.project;
 
 import androidx.activity.result.ActivityResultLauncher;
+import androidx.appcompat.app.ActionBarDrawerToggle;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.appcompat.widget.Toolbar;
+import androidx.core.view.GravityCompat;
+import androidx.drawerlayout.widget.DrawerLayout;
 
 import android.app.Activity;
 import android.content.ContentResolver;
@@ -10,9 +14,11 @@ import android.content.Intent;
 import android.database.sqlite.SQLiteDatabase;
 import android.net.Uri;
 import android.os.Bundle;
+import android.view.MenuItem;
 import android.view.View;
 import android.widget.EditText;
 
+import com.google.android.material.navigation.NavigationView;
 import com.google.android.material.textfield.TextInputEditText;
 
 import java.io.Console;
@@ -20,6 +26,9 @@ import java.util.ArrayList;
 
 public class AddQuoteActivity extends AppCompatActivity {
 
+    private DrawerLayout drawerLayout;
+    private ActionBarDrawerToggle toggle;
+    private NavigationView navigationView;
     private EditText editText_quote;
     private EditText editText_author;
     private EditText editText_date;
@@ -28,7 +37,39 @@ public class AddQuoteActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_add_quote);
-        getSupportActionBar().hide();
+        Toolbar toolbar = findViewById(R.id.toolbar);
+        setSupportActionBar(toolbar);
+
+        drawerLayout = findViewById(R.id.drawer_layout);
+        toggle = new ActionBarDrawerToggle(this, drawerLayout, toolbar, R.string.navigation_drawer_open, R.string.navigation_drawer_close);
+        drawerLayout.addDrawerListener(toggle);
+        toggle.syncState();
+
+        navigationView = findViewById(R.id.nav_view);
+        navigationView.setNavigationItemSelectedListener(new NavigationView.OnNavigationItemSelectedListener() {
+            public boolean onNavigationItemSelected(MenuItem item) {
+                // Handle navigation view item clicks here.
+                int id = item.getItemId();
+
+                if (id == R.id.nav_add_quote) {
+                    //   Intent intent = new Intent(AddQuoteActivity.this, AddQuoteActivity.class);
+                    //startActivity(intent);
+                }
+                else if (id == R.id.nav_view_all)
+                {
+                    Intent intent = new Intent(AddQuoteActivity.this, ViewAllQuotesActivity.class);
+                    startActivity(intent);
+                }
+                else
+                {
+                    Intent intent = new Intent(AddQuoteActivity.this, MainActivity2.class);
+                    startActivity(intent);
+                }
+
+                drawerLayout.closeDrawer(GravityCompat.START);
+                return true;
+            }
+        });
 
         this.editText_quote = findViewById(R.id.editText_quote_addQuote);
         this.editText_author = findViewById(R.id.edit_text_quotePerson_addQuote);

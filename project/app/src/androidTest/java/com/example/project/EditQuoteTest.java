@@ -2,9 +2,12 @@ package com.example.project;
 
 import android.content.ContentResolver;
 import android.database.Cursor;
+import android.os.SystemClock;
 
 import androidx.test.core.app.ApplicationProvider;
+
 import androidx.test.espresso.contrib.RecyclerViewActions;
+
 import androidx.test.ext.junit.rules.ActivityScenarioRule;
 import androidx.test.ext.junit.runners.AndroidJUnit4;
 
@@ -29,6 +32,7 @@ public class EditQuoteTest {
 
     @Test
     public void clickQuote_opensDetailFragment_and_updatesQuote() {
+
         // Click on the first quote in the list
         onView(withId(R.id.recycler_view_quotes)).perform(RecyclerViewActions.actionOnItemAtPosition(0, click()));
 
@@ -41,10 +45,10 @@ public class EditQuoteTest {
         onView(withId(R.id.editText_quote)).perform(clearText(), typeText(newQuote));
         onView(withId(R.id.editText_author)).perform(clearText(), typeText(newAuthor));
         onView(withId(R.id.editText_date)).perform(clearText(), typeText(newDate));
-
+        SystemClock.sleep(250);
         // Click on the "Save" button
         onView(withId(R.id.button_save)).perform(click());
-
+       // onView(ViewMatchers.withId(R.id.button_save)).perform(ViewActions.scrollTo()).perform(ViewActions.click());
         // Fetch the updated quote from the database
         ContentResolver contentResolver = ApplicationProvider.getApplicationContext().getContentResolver();
         String[] projection = {

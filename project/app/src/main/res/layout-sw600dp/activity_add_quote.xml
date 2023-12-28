@@ -21,8 +21,11 @@
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:background="@color/cardview_dark_background"
-            tools:context=".AddQuoteActivity">
-
+            app:layout_constraintTop_toBottomOf="@+id/toolbar"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintEnd_toEndOf="parent">
+            >
             <Button
                 android:id="@+id/btn_back_addQuote"
                 android:layout_width="wrap_content"
@@ -35,15 +38,12 @@
 
             <Button
                 android:id="@+id/btn_addQuote_addQuote"
-                android:layout_width="342dp"
+                android:layout_width="750dp"
                 android:layout_height="46dp"
-                android:layout_marginStart="8dp"
+                android:layout_marginStart="150dp"
                 android:layout_marginTop="99dp"
-                android:layout_marginEnd="8dp"
                 android:onClick="onConfirm"
                 android:text="@string/nav_add_quote"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintHorizontal_bias="1.0"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@+id/edit_text_quoteDate_addQuote" />
 
@@ -51,17 +51,19 @@
                 android:id="@+id/textView3"
                 android:layout_width="115dp"
                 android:layout_height="24dp"
-                android:layout_marginStart="50dp"
-                android:layout_marginTop="67dp"
+                android:layout_marginStart="150dp"
+                android:layout_marginTop="64dp"
+                android:layout_marginEnd="482dp"
                 android:text="@string/quotePrompt"
+                app:layout_constraintEnd_toStartOf="@+id/editText_quote_addQuote"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@+id/btn_back_addQuote" />
 
             <TextView
                 android:id="@+id/textView4"
                 android:layout_width="115dp"
-                android:layout_height="24dp"
-                android:layout_marginStart="50dp"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="150dp"
                 android:layout_marginTop="80dp"
                 android:text="@string/quote_author"
                 app:layout_constraintStart_toStartOf="parent"
@@ -71,7 +73,7 @@
                 android:id="@+id/editText_quote_addQuote"
                 android:layout_width="178dp"
                 android:layout_height="wrap_content"
-                android:layout_marginStart="25dp"
+                android:layout_marginStart="450dp"
                 android:layout_marginTop="55dp"
                 android:ems="10"
                 android:inputType="textPersonName"
@@ -83,7 +85,7 @@
                 android:id="@+id/edit_text_quotePerson_addQuote"
                 android:layout_width="178dp"
                 android:layout_height="45dp"
-                android:layout_marginStart="25dp"
+                android:layout_marginStart="450dp"
                 android:layout_marginTop="80dp"
                 android:ems="10"
                 android:inputType="textPersonName"
@@ -94,9 +96,11 @@
                 android:id="@+id/textView6"
                 android:layout_width="115dp"
                 android:layout_height="wrap_content"
-                android:layout_marginStart="50dp"
+                android:layout_marginStart="150dp"
                 android:layout_marginTop="84dp"
                 android:text="@string/quote_date"
+                app:layout_constraintEnd_toStartOf="@+id/edit_text_quoteDate_addQuote"
+                app:layout_constraintHorizontal_bias="0.0"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@+id/textView4" />
 
@@ -104,7 +108,7 @@
                 android:id="@+id/edit_text_quoteDate_addQuote"
                 android:layout_width="178dp"
                 android:layout_height="wrap_content"
-                android:layout_marginStart="25dp"
+                android:layout_marginStart="450dp"
                 android:layout_marginTop="71dp"
                 android:ems="10"
                 android:inputType="date"
