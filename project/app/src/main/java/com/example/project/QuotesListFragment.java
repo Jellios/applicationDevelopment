@@ -31,16 +31,12 @@ public class QuotesListFragment extends Fragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.fragment_quotes_list, container, false);
 
-        // Initialize RecyclerView
         RecyclerView recyclerView = view.findViewById(R.id.recycler_view_quotes);
 
-        // Initialize the adapter
         adapter = new recyclerAdapter(new ArrayList<>());
 
-        // Set the adapter for the RecyclerView
         recyclerView.setAdapter(adapter);
 
-        // Set the layout manager for the RecyclerView
         recyclerView.setLayoutManager(new LinearLayoutManager(getContext()));
 
         DividerItemDecoration dividerItemDecoration = new DividerItemDecoration(recyclerView.getContext(), LinearLayoutManager.VERTICAL);
@@ -50,17 +46,13 @@ public class QuotesListFragment extends Fragment {
     }
 
     public void setQuoteList(ArrayList<Quote> quoteList) {
-        // Update the data in the adapter
         adapter.setQuoteList(quoteList);
 
-        // Notify the adapter that the data has changed
         adapter.notifyDataSetChanged();
     }
     public void refreshQuotesList() {
-        // Fetch the updated list of quotes from the database
         ArrayList<Quote> updatedQuotes = ((MainActivity2)getActivity()).fetchQuotesFromDatabase();
 
-        // Update the quote list in the adapter
         setQuoteList(updatedQuotes);
     }
 }

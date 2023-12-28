@@ -48,7 +48,7 @@ public class AddQuoteActivity extends AppCompatActivity {
         navigationView = findViewById(R.id.nav_view);
         navigationView.setNavigationItemSelectedListener(new NavigationView.OnNavigationItemSelectedListener() {
             public boolean onNavigationItemSelected(MenuItem item) {
-                // Handle navigation view item clicks here.
+
                 int id = item.getItemId();
 
                 if (id == R.id.nav_add_quote) {
@@ -93,15 +93,15 @@ public class AddQuoteActivity extends AppCompatActivity {
 
             ContentResolver contentResolver = getContentResolver();
 
-// Use the content resolver to insert the new quote
+
             Uri newQuoteUri = contentResolver.insert(QuoteReaderContract.QuoteEntry.CONTENT_URI_QUOTES, values);
 
-// The new row ID can be obtained from the URI
+
             long newRowId;
             if (newQuoteUri != null) {
                 newRowId = Long.parseLong(newQuoteUri.getLastPathSegment());
             } else {
-                // Handle the error case if the insertion fails
+
                 newRowId = -1;
             }
 

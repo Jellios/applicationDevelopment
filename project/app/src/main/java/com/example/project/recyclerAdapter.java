@@ -52,19 +52,14 @@ public class recyclerAdapter extends RecyclerView.Adapter<recyclerAdapter.MyView
         holder.quote_tv_date.setText(quote.getQuoteDate());
         holder.quote_tv_id.setText(String.valueOf(quote.getId()));
 
-        // Set an OnClickListener for the item view
         holder.itemView.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                // Get the current position
                 int position = holder.getAdapterPosition();
 
-                // Check if position is valid
                 if (position != RecyclerView.NO_POSITION) {
-                    // Get the quote at the clicked position
                     Quote quote = quoteList.get(position);
 
-                    // Notify the listener (the activity) that a quote was selected
                     if (v.getContext() instanceof QuotesListFragment.OnQuoteSelectedListener) {
                         ((QuotesListFragment.OnQuoteSelectedListener) v.getContext()).onQuoteSelected(quote);
                     }

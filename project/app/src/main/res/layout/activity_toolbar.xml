@@ -18,6 +18,5 @@
 
     </com.google.android.material.appbar.AppBarLayout>
 
-    <!-- Your content here -->
 
 </androidx.coordinatorlayout.widget.CoordinatorLayout>

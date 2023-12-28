@@ -16,7 +16,6 @@ public class ToolbarActivity extends AppCompatActivity {
         setContentView(R.layout.activity_toolbar);
 
         Toolbar toolbar = findViewById(R.id.toolbar);
-       // setSupportActionBar(toolbar);
     }
 
     @Override
@@ -33,9 +32,7 @@ public class ToolbarActivity extends AppCompatActivity {
                 startActivity(intent);
                 return true;
             case R.id.action_activity2:
-                // Navigate to Activity 2
                 return true;
-            // Handle other items as needed
             default:
                 return super.onOptionsItemSelected(item);
         }

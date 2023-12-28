@@ -11,6 +11,5 @@
             android:id="@+id/nav_view_all_2"
             android:title="View all quotes with fragments"
                 />
-        <!-- Add more items as needed -->
     </group>
 </menu>

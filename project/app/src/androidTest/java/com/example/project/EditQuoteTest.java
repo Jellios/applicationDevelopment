@@ -33,23 +33,18 @@ public class EditQuoteTest {
     @Test
     public void clickQuote_opensDetailFragment_and_updatesQuote() {
 
-        // Click on the first quote in the list
         onView(withId(R.id.recycler_view_quotes)).perform(RecyclerViewActions.actionOnItemAtPosition(0, click()));
 
-        // Define a new quote, author, and date
         String newQuote = "This is an updated quote";
         String newAuthor = "Updated Author";
         String newDate = "01/01/2022";
 
-        // Clear and input the new quote, author, and date
         onView(withId(R.id.editText_quote)).perform(clearText(), typeText(newQuote));
         onView(withId(R.id.editText_author)).perform(clearText(), typeText(newAuthor));
         onView(withId(R.id.editText_date)).perform(clearText(), typeText(newDate));
         SystemClock.sleep(250);
-        // Click on the "Save" button
         onView(withId(R.id.button_save)).perform(click());
        // onView(ViewMatchers.withId(R.id.button_save)).perform(ViewActions.scrollTo()).perform(ViewActions.click());
-        // Fetch the updated quote from the database
         ContentResolver contentResolver = ApplicationProvider.getApplicationContext().getContentResolver();
         String[] projection = {
                 QuoteReaderContract.QuoteEntry._ID,
@@ -65,7 +60,6 @@ public class EditQuoteTest {
                 null
         );
 
-        // Check that the quote was updated in the database
         boolean quoteUpdated = false;
         if (cursor != null) {
             while (cursor.moveToNext()) {
@@ -86,27 +80,20 @@ public class EditQuoteTest {
 
     @Test
     public void clickCancelButton_closesFragment() {
-        // Click on the first quote in the list
         onView(withId(R.id.recycler_view_quotes)).perform(RecyclerViewActions.actionOnItemAtPosition(0, click()));
 
-        // Click the cancel button
         onView(withId(R.id.discard_button)).perform(click());
 
-        // Check if the fragment is closed by asserting that the RecyclerView (or any other view in the main activity) is displayed
         onView(withId(R.id.recycler_view_quotes)).check(matches(isDisplayed()));
     }
     @Test
     public void clickDeleteButton_removesQuoteFromDatabase() {
-        // Click on the first quote in the list
         onView(withId(R.id.recycler_view_quotes)).perform(RecyclerViewActions.actionOnItemAtPosition(0, click()));
 
-        // Get the ID of the quote to be deleted
         int quoteId = getFirstQuoteId();
 
-        // Click the delete button
         onView(withId(R.id.button_delete)).perform(click());
 
-        // Check if the quote has been removed from the database
         assertFalse(isQuoteInDatabase(quoteId));
     }
 

@@ -1,7 +1,5 @@
 <resources>
-    <!-- Base application theme. -->
     <style name="AppTheme" parent="Theme.MaterialComponents">
-        <!-- Customize your theme here. -->
         <item name="colorPrimary">#BB86FC</item> <!-- Purple 200 -->
         <item name="colorPrimaryDark">#3700B3</item> <!-- Purple 700 -->
         <item name="colorAccent">#03DAC6</item> <!-- Teal 200 -->

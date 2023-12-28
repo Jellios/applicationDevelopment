@@ -22,16 +22,16 @@ public class AddQuoteFragment extends Fragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.fragment_add_quote, container, false);
 
-        // Initialize the EditText fields
+
         quoteText = view.findViewById(R.id.editText_quote);
         quoteAuthor = view.findViewById(R.id.editText_author);
         quoteDate = view.findViewById(R.id.editText_date);
 
-        // Initialize the add and cancel buttons
+
         Button addButton = view.findViewById(R.id.button_add);
         Button cancelButton = view.findViewById(R.id.button_cancel);
 
-        // Set the click listeners for the buttons
+
         addButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -64,15 +64,15 @@ public class AddQuoteFragment extends Fragment {
 
             ContentResolver contentResolver = getContext().getContentResolver();
 
-            // Use the content resolver to insert the new quote
+
             Uri newQuoteUri = contentResolver.insert(QuoteReaderContract.QuoteEntry.CONTENT_URI_QUOTES, values);
 
-            // The new row ID can be obtained from the URI
+
             long newRowId;
             if (newQuoteUri != null) {
                 newRowId = Long.parseLong(newQuoteUri.getLastPathSegment());
             } else {
-                // Handle the error case if the insertion fails
+
                 newRowId = -1;
             }
         }

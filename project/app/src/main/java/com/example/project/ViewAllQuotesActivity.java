@@ -48,7 +48,6 @@ public class ViewAllQuotesActivity extends AppCompatActivity {
         NavigationView navigationView = findViewById(R.id.nav_view);
         navigationView.setNavigationItemSelectedListener(new NavigationView.OnNavigationItemSelectedListener() {
             public boolean onNavigationItemSelected(MenuItem item) {
-                // Handle navigation view item clicks here.
                 int id = item.getItemId();
 
                 if (id == R.id.nav_add_quote) {
@@ -71,17 +70,13 @@ public class ViewAllQuotesActivity extends AppCompatActivity {
             }
         });
 
-        // Your existing code here
         recyclerView = findViewById(R.id.AllQoutes_RCV);
         this.quotes_list = new ArrayList<>();
 
-        // Fetch the data from the database
         fetchQuotesFromDatabase();
 
-        // Get the QuotesListFragment
         QuotesListFragment quotesListFragment = (QuotesListFragment) getSupportFragmentManager().findFragmentById(R.id.fragment_quotes_list);
 
-        // Pass the data to the QuotesListFragment
         if (quotesListFragment != null) {
             quotesListFragment.setQuoteList(quotes_list);
         }
@@ -103,7 +98,6 @@ public class ViewAllQuotesActivity extends AppCompatActivity {
     }
 
     protected void fetchQuotesFromDatabase() {
-        // Now you can use this URI to query all quotes using ContentResolver
         ContentResolver contentResolver = getContentResolver();
 
         String[] projection = {
@@ -121,7 +115,6 @@ public class ViewAllQuotesActivity extends AppCompatActivity {
                 null
         );
 
-        // Process the cursor and add entries to the quotes_list
         if (cursor != null) {
             try {
                 while (cursor.moveToNext()) {
@@ -130,7 +123,6 @@ public class ViewAllQuotesActivity extends AppCompatActivity {
                     String quotePerson = cursor.getString(cursor.getColumnIndexOrThrow(QuoteReaderContract.QuoteEntry.COLUMN_QUOTE_PERSON));
                     String quoteDate = cursor.getString(cursor.getColumnIndexOrThrow(QuoteReaderContract.QuoteEntry.COLUMN_QUOTE_DATE));
 
-                    // Create a Quote object and add it to the list
                     Quote quote = new Quote(quoteText, quotePerson, quoteDate, id);
                     quotes_list.add(quote);
                 }

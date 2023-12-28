@@ -30,18 +30,14 @@ public class AddQuoteTest {
         String author = "Espresso";
         String date = "18/11/2001";
 
-        // Click on the "Add Quote" button
         onView(withId(R.id.fab)).perform(click());
 
-        // Input the quote, author, and date
         onView(withId(R.id.editText_quote)).perform(typeText(quote));
         onView(withId(R.id.editText_author)).perform(typeText(author));
         onView(withId(R.id.editText_date)).perform(typeText(date));
 
-        // Click on the "Confirm" button
         onView(withId(R.id.button_add)).perform(click());
 
-        // Use the ContentResolver to get the quotes from the database
         ContentResolver contentResolver = ApplicationProvider.getApplicationContext().getContentResolver();
         String[] projection = {
                 QuoteReaderContract.QuoteEntry._ID,
@@ -57,7 +53,6 @@ public class AddQuoteTest {
                 null
         );
 
-        // Check that the quote was inserted into the database
         boolean quoteFound = false;
         if (cursor != null) {
             while (cursor.moveToNext()) {
@@ -77,13 +72,10 @@ public class AddQuoteTest {
     }
     @Test
     public void clickCancelButton_closesFragment() {
-        // Launch the AddQuoteFragment
         onView(withId(R.id.fab)).perform(click());
 
-        // Click the cancel button
         onView(withId(R.id.button_cancel)).perform(click());
 
-        // Check if the fragment is closed by asserting that the RecyclerView (or any other view in the main activity) is displayed
         onView(withId(R.id.recycler_view_quotes)).check(matches(isDisplayed()));
     }
 }

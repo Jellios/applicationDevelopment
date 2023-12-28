@@ -10,5 +10,4 @@
         android:title="Activity 2"
         android:orderInCategory="100"
         app:showAsAction="never" />
-    <!-- Add more items as needed -->
 </menu>
